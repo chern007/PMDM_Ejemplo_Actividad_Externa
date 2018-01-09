@@ -1,6 +1,5 @@
 package com.example.ilm.actividadexterna;
 
-import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,13 +9,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 
 public class Selecciona extends ListActivity implements ListView.OnItemClickListener{
 
 
     public void onItemClick(AdapterView<?> a, View view, int position, long id){
+        //creamos un intent para pasar los datos al otro activity
         Intent i=new Intent();
         i.putExtra("PROVINCIA",a.getItemAtPosition(position).toString());
         setResult(RESULT_OK,i);
@@ -26,11 +25,13 @@ public class Selecciona extends ListActivity implements ListView.OnItemClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         String [] elementos={"Toledo","Ciudad Real","Cuenca","Guadalajara","Albacete"};
+        //declaramos el adaptor
         ArrayAdapter<String> adaptador;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selecciona);
 
+        //iniciamos un "adaptor" y metemos todas las ciudades que estan en el array que hemos guardado anteriormente
         ListView l=(ListView)findViewById(android.R.id.list);
         adaptador=new ArrayAdapter<String>(this,R.layout.fila,elementos);
         setListAdapter(adaptador);
